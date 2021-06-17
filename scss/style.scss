@@ -1,0 +1,144 @@
+@import "config";
+
+%share-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5em;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+body {
+  background-color: $light-gray-blue;
+}
+
+.active {
+  display: flex !important;
+}
+
+.main {
+  background-color: white;
+
+  max-width: 325px;
+  margin: 100px auto 0 auto;
+
+  border-radius: 1rem;
+  overflow: hidden;
+
+  @include mq(1024px) {
+    max-width: 720px;
+    margin: 250px auto 0 auto;
+    display: grid;
+    grid-template-columns: 41% 59%;
+  }
+
+  &-image {
+    background-image: url("../images/drawers.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 215px;
+  }
+
+  &-article {
+    padding: 2.6rem 2.6rem 1.6rem 2.6rem;
+
+    @include mq(1024px) {
+      padding: 3rem 3rem 2rem 3rem;
+    }
+
+    .title {
+      color: $desaturated-dark-blue;
+      font-size: 1.2rem;
+      padding-bottom: 1rem;
+
+      @include mq(1024px) {
+        font-size: 1.5rem;
+      }
+    }
+
+    .body {
+      color: $gray-blue;
+
+      @include mq(1024px) {
+        line-height: 1.7;
+      }
+    }
+
+    .author {
+      // display: flex;
+      display: none;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 2rem;
+
+      .info {
+        display: flex;
+        align-items: center;
+
+        .avatar {
+          height: 40px;
+          border-radius: 50%;
+        }
+
+        .desc {
+          padding: 0 0 0 1em;
+
+          h3 {
+            color: $desaturated-dark-blue;
+          }
+          p {
+            color: $gray-blue;
+          }
+        }
+      }
+
+      .share-icon {
+        @extend %share-icon;
+        background-color: $light-gray-blue;
+      }
+    }
+  }
+
+  #share {
+    // display: flex;
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    background-color: $dark-gray-blue;
+    color: $desaturated-dark-blue;
+
+    padding: 1.5rem 2.6rem;
+
+    @include mq(1024px) {
+      position: fixed;
+      border-radius: 1rem;
+      right: 20vw;
+      top: 400px;
+    }
+
+    .share-option {
+      display: flex;
+      text-transform: uppercase;
+      letter-spacing: 6px;
+
+      .facebook,
+      .twitter,
+      .pinterest {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-left: 1.2rem;
+      }
+    }
+    .share-icon {
+      @extend %share-icon;
+      background-color: $desaturated-dark-blue;
+      color: $light-gray-blue;
+
+      @include mq(1024px) {
+        display: none;
+      }
+    }
+  }
+}
