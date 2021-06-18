@@ -1,5 +1,6 @@
 @import "config";
 
+// share icon properties
 %share-icon {
   display: flex;
   justify-content: center;
@@ -9,37 +10,56 @@
   cursor: pointer;
 }
 
+// set background color of body
 body {
   background-color: $light-gray-blue;
+
+  // set main container in the center of the screen
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+// if share button is clicked, popup menu will appear
 .active {
   display: flex !important;
 }
 
+// main content container
 .main {
   background-color: white;
 
   max-width: 325px;
-  margin: 100px auto 0 auto;
+  margin: 0 auto;
 
   border-radius: 1rem;
-  overflow: hidden;
+
+  // set main as relative so that its child element could position itself
+  // relative to main as parent element
+  position: relative;
 
   @include mq(1024px) {
     max-width: 720px;
-    margin: 250px auto 0 auto;
+    margin: 0 auto;
     display: grid;
     grid-template-columns: 41% 59%;
   }
 
+  // header image is a div with background image
   &-image {
     background-image: url("../images/drawers.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     min-height: 215px;
+    border-radius: 1rem 1rem 0 0;
+
+    @include mq(1024px) {
+      border-radius: 1rem 0 0 1rem;
+    }
   }
 
+  // main article where all text lives
   &-article {
     padding: 2.6rem 2.6rem 1.6rem 2.6rem;
 
@@ -47,6 +67,7 @@ body {
       padding: 3rem 3rem 2rem 3rem;
     }
 
+    // article title
     .title {
       color: $desaturated-dark-blue;
       font-size: 1.2rem;
@@ -57,6 +78,7 @@ body {
       }
     }
 
+    // article body
     .body {
       color: $gray-blue;
 
@@ -65,9 +87,9 @@ body {
       }
     }
 
+    // article author
     .author {
-      // display: flex;
-      display: none;
+      display: flex;
       justify-content: space-between;
       align-items: center;
       padding-top: 2rem;
@@ -93,51 +115,76 @@ body {
         }
       }
 
+      // share icon in the corner bottom right
       .share-icon {
         @extend %share-icon;
         background-color: $light-gray-blue;
       }
     }
-  }
 
-  #share {
-    // display: flex;
-    display: none;
-    align-items: center;
-    justify-content: space-between;
-    background-color: $dark-gray-blue;
-    color: $desaturated-dark-blue;
+    // share popup menu that will appear if share icon is clicked
+    #share {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      background-color: $dark-gray-blue;
+      color: $desaturated-dark-blue;
 
-    padding: 1.5rem 2.6rem;
+      padding: 1.5rem 2.6rem;
+      border-radius: 0 0 1rem 1rem;
 
-    @include mq(1024px) {
-      position: fixed;
-      border-radius: 1rem;
-      right: 20vw;
-      top: 400px;
-    }
-
-    .share-option {
-      display: flex;
-      text-transform: uppercase;
-      letter-spacing: 6px;
-
-      .facebook,
-      .twitter,
-      .pinterest {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-left: 1.2rem;
-      }
-    }
-    .share-icon {
-      @extend %share-icon;
-      background-color: $desaturated-dark-blue;
-      color: $light-gray-blue;
+      // set its position as absolute so it removes itself from the flow of document
+      // and set its position relative to main container as parent element
+      position: absolute;
+      width: 325px;
+      right: 0;
+      bottom: 0;
 
       @include mq(1024px) {
-        display: none;
+        width: 250px;
+        border-radius: 1rem;
+        right: -70px;
+        bottom: 75px;
+      }
+
+      .share-option {
+        display: flex;
+        text-transform: uppercase;
+        letter-spacing: 6px;
+
+        .facebook,
+        .twitter,
+        .pinterest {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-left: 1.2rem;
+        }
+      }
+      .share-icon {
+        @extend %share-icon;
+        background-color: $desaturated-dark-blue;
+        color: $light-gray-blue;
+
+        @include mq(1024px) {
+          display: none;
+        }
+      }
+    }
+
+    // pop up arrow
+    #share::after {
+      display: none;
+      @include mq(1024px) {
+        display: block;
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        margin-left: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: $dark-gray-blue transparent transparent transparent;
       }
     }
   }
